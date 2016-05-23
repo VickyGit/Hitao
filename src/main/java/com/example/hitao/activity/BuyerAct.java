@@ -13,13 +13,19 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.transition.ChangeTransform;
 import android.transition.Explode;
 import android.transition.Transition;
 import android.util.Log;
 import android.util.Pair;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hitao.R;
@@ -30,6 +36,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 
 
 import java.io.File;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +64,9 @@ public class BuyerAct extends Activity implements View.OnClickListener{
     private int FIRST_REFRESH=0;
     private Buyer buyer;
     public static Double money;
+    private EditText search_edit;
+    private Button clean_btn;
+    private String searchText;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -77,6 +87,46 @@ public class BuyerAct extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buyer_main_layout);
+        search_edit= (EditText) findViewById(R.id.search_edit);
+        clean_btn= (Button) findViewById(R.id.search_cleanbtn);
+        clean_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                search_edit.setText("");
+            }
+        });
+        search_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.length()==0){
+                    clean_btn.setVisibility(View.GONE);
+                }else{
+                    clean_btn.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        search_edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (i== KeyEvent.KEYCODE_ENTER){
+                    //隐藏键盘
+                    ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(BuyerAct.this.getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                    searchText=search_edit.getText().toString();
+                    searchProduct();
+                }
+                return false;
+            }
+        });
         orderFloatingBtn= (FloatingActionButton) findViewById(R.id.action_a);
         personalFloatingBtn= (FloatingActionButton) findViewById(R.id.action_b);
 
@@ -174,6 +224,25 @@ public class BuyerAct extends Activity implements View.OnClickListener{
         intent.putExtra("productObject",productList.get(position));
         intent.putExtra("position",position);
         startActivity(intent,bundle);
+    }
+    //查找商品
+    public void searchProduct(){
+        BmobQuery<Product> search=new BmobQuery<Product>();
+        search.addWhereContains("ProductName",searchText);
+        search.findObjects(BuyerAct.this, new FindListener<Product>() {
+            @Override
+            public void onSuccess(List<Product> list) {
+                productList=list;
+                Message message=new Message();
+                message.what=REFRESHVIEW;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
     }
 
 
