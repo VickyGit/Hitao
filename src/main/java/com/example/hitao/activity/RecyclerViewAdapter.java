@@ -171,7 +171,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     //性能需要优化
 //                    Toast.makeText(mContext,"图片下载完成"+file.getPath(),Toast.LENGTH_SHORT).show();
                     Bitmap bitmap=decodeSampledBitmapfromFielPath(file.getPath(),width,height);
-                    addBitmapToMemoryCache(file.getPath(),bitmap);
+                    if (file.getPath()!=null||bitmap!=null){
+                        addBitmapToMemoryCache(file.getPath(),bitmap);
+                    }
+
 
                 if(bitmap!=null){
                     holder.productPic.setImageBitmap(bitmap);
@@ -181,7 +184,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
                 @Override
                 public void onFailure(int i, String s) {
-                    Toast.makeText(mContext,"图片下载失败"+s,Toast.LENGTH_SHORT).show();
+
                 }
             });
         }
