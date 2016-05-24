@@ -143,6 +143,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                                     Toast.makeText(MainActivity.this,"用户名不存在",Toast.LENGTH_SHORT).show();
                                 }else{
                                     Intent intent=new Intent(MainActivity.this,BuyerAct.class);
+                                    intent.putExtra("buyerObject",list.get(0));
 
                                     //启动普通的Activity动画
                                     startActivity(intent);

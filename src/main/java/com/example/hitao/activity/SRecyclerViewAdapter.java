@@ -95,7 +95,7 @@ public class SRecyclerViewAdapter extends RecyclerView.Adapter<SRecyclerViewAdap
         holder.itemCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(mContext,DetailedAct.class);
+                Intent intent=new Intent(mContext,SDetailedAct.class);
                 intent.putExtra("picPath",filePath);
                 intent.putExtra("name",productList.get(position).getProductName());
                 intent.putExtra("desc",productList.get(position).getProductDesc());
