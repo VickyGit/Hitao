@@ -1,38 +1,29 @@
 package com.example.hitao.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.transition.Explode;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.hitao.R;
 import com.example.hitao.model.Buyer;
-import com.example.hitao.model.Product;
+import com.example.hitao.model.Seller;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONArray;
 
-import java.io.File;
-import java.net.URL;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.FindCallback;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
-import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UploadFileListener;
 
 public class MainActivity extends Activity implements View.OnClickListener{
     private MaterialEditText nameEdit;
@@ -43,13 +34,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private Button regBtn;
     private String userName;
     private String userPass;
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //第一步：允许Transition，并设置Transition
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setEnterTransition(new Explode().setDuration(1000));
-        getWindow().setExitTransition(new Explode().setDuration(1000));
+        //getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        //getWindow().setEnterTransition(new Explode().setDuration(1000));
         setContentView(R.layout.activity_main);
         init();
         //初始化Bmob
@@ -75,7 +66,19 @@ public class MainActivity extends Activity implements View.OnClickListener{
      */
     public void queryData(){
         BmobQuery query=new BmobQuery("Buyer");
+        BmobQuery query1 = new BmobQuery("Seller");
         query.findObjects(this, new FindCallback() {
+            @Override
+            public void onSuccess(JSONArray jsonArray) {
+                Toast.makeText(MainActivity.this,"查询成功"+jsonArray.toString(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                Toast.makeText(MainActivity.this,"查询失败:"+s,Toast.LENGTH_SHORT).show();
+            }
+        });
+        query1.findObjects(this, new FindCallback() {
             @Override
             public void onSuccess(JSONArray jsonArray) {
                 Toast.makeText(MainActivity.this,"查询成功"+jsonArray.toString(),Toast.LENGTH_SHORT).show();
@@ -88,6 +91,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         });
     }
     //注册和登录按钮动作事件
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -131,18 +135,43 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     if(buyerBtn.isChecked()){
                         BmobQuery<Buyer> buyerBmobQuery=new BmobQuery<Buyer>();
                         buyerBmobQuery.addWhereEqualTo("BuyerName",userName);
-                        buyerBmobQuery.addWhereEqualTo("Password",userPass);
                         buyerBmobQuery.findObjects(MainActivity.this, new FindListener<Buyer>() {
+                            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                             @Override
                             public void onSuccess(List<Buyer> list) {
-                               if(list.isEmpty()){
-                                   Toast.makeText(MainActivity.this,"用户名或密码错误",Toast.LENGTH_SHORT).show();
-                               }else{
-                                   Intent intent=new Intent(MainActivity.this,BuyerAct.class);
-                                   intent.putExtra("buyerObject",list.get(0));
-                                   //启动普通的Activity动画
-                                   startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                               }
+                                if(list.isEmpty()){
+                                    Toast.makeText(MainActivity.this,"用户名不存在",Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Intent intent=new Intent(MainActivity.this,BuyerAct.class);
+
+                                    //启动普通的Activity动画
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                Toast.makeText(MainActivity.this,"用户名或密码错误",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    }else if (sellerBtn.isChecked()){
+                        BmobQuery<Seller> sellerBmobQuery=new BmobQuery<Seller>();
+                        sellerBmobQuery.addWhereEqualTo("SellerName",userName);
+                        sellerBmobQuery.findObjects(MainActivity.this, new FindListener<Seller>() {
+                            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onSuccess(List<Seller> list) {
+                                if(list.isEmpty()){
+                                    Toast.makeText(MainActivity.this,"用户名不存在",Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Intent intent=new Intent(MainActivity.this,SellerAct.class);
+                                    intent.putExtra("Mysellerid",list.get(0).getSellerId());
+                                    intent.putExtra("sellername",list.get(0).getSellerName());
+                                    //启动普通的Activity动画
+                                    startActivity(intent);
+                                }
                             }
 
                             @Override
@@ -161,7 +190,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
                 Intent intent=new Intent(MainActivity.this,RegAct.class);
                 //启动普通的Activity动画
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                startActivity(intent);
                 break;
             }
 
