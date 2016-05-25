@@ -9,11 +9,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.hitao.R;
 import com.example.hitao.model.Product;
+import com.example.hitao.model.Seller;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class SellerAct extends Activity {
     private int FIRST_REFRESH=0;
     private Integer Mysellerid;
     private String sellername;
+    private Seller seller;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -65,6 +68,7 @@ public class SellerAct extends Activity {
         personalFloatingBtn= (FloatingActionButton) findViewById(R.id.seller_action_b);
         swipeRefreshLayout= (SwipeRefreshLayout) findViewById(R.id.swipe_seller_main);
         addproductBtn = (FloatingActionButton)findViewById(R.id.seller_action_c);
+        seller= (Seller) getIntent().getSerializableExtra("sellerObject");
 
         //1、实例化recyclerView
         recyclerView= (RecyclerView) findViewById(R.id.seller_recyclerview);
@@ -148,6 +152,12 @@ public class SellerAct extends Activity {
         personalFloatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(SellerAct.this,SPersonalActivity.class);
+                intent.putExtra("SellerObjectId",seller.getObjectId());
+                Log.d("SellerObjectId",seller.getObjectId());
+                startActivity(intent);
+
+
 
             }
         });

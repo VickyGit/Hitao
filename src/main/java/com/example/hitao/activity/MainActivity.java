@@ -179,6 +179,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
                                         Intent intent=new Intent(MainActivity.this,SellerAct.class);
                                         intent.putExtra("Mysellerid",list.get(0).getSellerId());
                                         intent.putExtra("sellername",list.get(0).getSellerName());
+                                        intent.putExtra("sellerObject",list.get(0));
+
                                         //启动普通的Activity动画
                                         startActivity(intent);
                                     }

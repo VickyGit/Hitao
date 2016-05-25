@@ -42,6 +42,7 @@
         <activity android:name=".activity.ChProoductActivity"/>
         <activity android:name=".activity.SDetailedAct"/>
         <activity android:name=".activity.SellerAct"/>
+        <activity android:name=".activity.SPersonalActivity"/>
     </application>
 
 </manifest>
