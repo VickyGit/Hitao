@@ -9,7 +9,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.example.hitao.R;
 import com.example.hitao.model.Order;
@@ -39,7 +38,7 @@ public class SOrderAct extends Activity{
                     swipeRefreshLayout.setRefreshing(false);
                     orderRecyclerViewAdapter= new SOrderRecyclerViewAdapter(SOrderAct.this,orderList);
                     recyclerView.setAdapter(orderRecyclerViewAdapter);
-                    Toast.makeText(SOrderAct.this, "Handler ProductList Size :" + orderList.size(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SOrderAct.this, "Handler ProductList Size :" + orderList.size(), Toast.LENGTH_SHORT).show();
                     break;
 
 
@@ -85,7 +84,7 @@ public class SOrderAct extends Activity{
             @Override
             public void onSuccess(List<Order> list) {
                 orderList = list;
-                Toast.makeText(SOrderAct.this,"findorder OrderList Size :"+list.size(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SOrderAct.this,"findorder OrderList Size :"+list.size(),Toast.LENGTH_SHORT).show();
                 if(FIRST_REFRESH==0){
                     Message message=new Message();
                     message.what=REFRESHVIEW;
@@ -96,7 +95,7 @@ public class SOrderAct extends Activity{
 
             @Override
             public void onError(int i, String s) {
-                Toast.makeText(SOrderAct.this,"失败",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SOrderAct.this,"失败",Toast.LENGTH_SHORT).show();
 
 
             }

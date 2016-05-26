@@ -1,6 +1,7 @@
 package com.example.hitao.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -132,13 +133,13 @@ public class ChProoductActivity extends Activity{
                 Spinner spinner = (Spinner) parent;
                 PCategory = position + 1;
 
-                Toast.makeText(getApplicationContext(), "" + (position + 1) + spinner.getItemAtPosition(position), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "" + (position + 1) + spinner.getItemAtPosition(position), Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "没有改变的处理", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "没有改变的处理", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -151,10 +152,21 @@ public class ChProoductActivity extends Activity{
                 product.delete(ChProoductActivity.this, new DeleteListener() {
                     @Override
                     public void onSuccess() {
+                        final ProgressDialog progressDialog = new ProgressDialog(ChProoductActivity.this);
+                        progressDialog.setTitle("删除成功");
+                        progressDialog.setMessage("Loading...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
+                        SellerAct.sellerAct.finish();
                         Intent intent = new Intent(ChProoductActivity.this, SellerAct.class);
+
                         intent.putExtra("Mysellerid", Mysellerid);
 
                         startActivity(intent);
+                        ChProoductActivity.this.finish();
+                        SDetailedAct.sDetailedAct.finish();
+
+
 
                     }
 
@@ -170,13 +182,21 @@ public class ChProoductActivity extends Activity{
         give_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String PpriceString = null;
                 Pnum = Integer.parseInt(String.valueOf(productnumEdit.getText()));
                 Pname = String.valueOf(productnameEdit.getText());
                 Pjieshao = String.valueOf(productjieshaoEdit.getText());
                 Pprice = Double.parseDouble(String.valueOf(productpriceEdit.getText()));
+                PpriceString = String.valueOf(productpriceEdit.getText());
 
-                if (Pnum != 0 && Pprice != null && Pjieshao != null && Pname != null) {
+                if (Pnum != 0 && PpriceString != null && Pjieshao != null && Pname != null) {
+                    final ProgressDialog progressDialog = new ProgressDialog(ChProoductActivity.this);
+                    progressDialog.setTitle("修改成功");
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
+                    Pprice = Double.valueOf(PpriceString);
                     final Product product = new Product();
                     product.setNumber(Pnum);
                     product.setPrice(Pprice);
@@ -202,10 +222,13 @@ public class ChProoductActivity extends Activity{
 
                                     @Override
                                     public void onSuccess() {
+                                        SellerAct.sellerAct.finish();
+                                        progressDialog.dismiss();
                                         Intent intent = new Intent(ChProoductActivity.this, SellerAct.class);
                                         intent.putExtra("Mysellerid", Mysellerid);
 
                                         startActivity(intent);
+                                        ChProoductActivity.this.finish();
 
                                     }
 

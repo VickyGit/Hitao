@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.hitao.R;
 import com.example.hitao.model.Product;
@@ -28,6 +27,7 @@ import cn.bmob.v3.listener.FindListener;
  * Created by fengsiyuan on 16/5/6.
  */
 public class SellerAct extends Activity {
+    static SellerAct sellerAct;
     private RecyclerView recyclerView;
     private List<Product> productList=new ArrayList<>();
     private SRecyclerViewAdapter sellerAdapter;
@@ -49,7 +49,7 @@ public class SellerAct extends Activity {
                     swipeRefreshLayout.setRefreshing(false);
                     sellerAdapter= new SRecyclerViewAdapter(productList, SellerAct.this);
                     recyclerView.setAdapter(sellerAdapter);
-                    Toast.makeText(SellerAct.this, "Handler ProductList Size :" + productList.size(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SellerAct.this, "Handler ProductList Size :" + productList.size(), Toast.LENGTH_SHORT).show();
                     break;
 
 
@@ -61,6 +61,7 @@ public class SellerAct extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seller_main_layout);
+        sellerAct = this;
         Intent intent = getIntent();
         Mysellerid = intent.getIntExtra("Mysellerid", 0);
         sellername = intent.getStringExtra("sellername");
@@ -93,15 +94,15 @@ public class SellerAct extends Activity {
 
         findProduct();
         FloatingActionButtoninfo();
-        Toast.makeText(SellerAct.this,"onCreate ProductList Size :"+productList.size(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SellerAct.this,"onCreate ProductList Size :"+productList.size(),Toast.LENGTH_SHORT).show();
 
 
     }
     public void findProduct(){
         BmobQuery<Product> productBmobQuery=new BmobQuery<Product>();
-        Toast.makeText(SellerAct.this,"sellid is"+Mysellerid,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SellerAct.this,"sellid is"+Mysellerid,Toast.LENGTH_SHORT).show();
         productBmobQuery.addWhereEqualTo("SellerId",Mysellerid);
-        Toast.makeText(SellerAct.this,"sellerid:"+Mysellerid,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SellerAct.this,"sellerid:"+Mysellerid,Toast.LENGTH_SHORT).show();
 
 
         productBmobQuery.findObjects(this, new FindListener<Product>() {
@@ -109,7 +110,7 @@ public class SellerAct extends Activity {
             public void onSuccess(List<Product> list) {
 
                 productList=list;
-                Toast.makeText(SellerAct.this,"findProduct ProductList Size :"+list.size(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SellerAct.this,"findProduct ProductList Size :"+list.size(),Toast.LENGTH_SHORT).show();
                 if(FIRST_REFRESH==0){
                     Message message=new Message();
                     message.what=REFRESHVIEW;
@@ -120,7 +121,7 @@ public class SellerAct extends Activity {
 
             @Override
             public void onError(int i, String s) {
-                Toast.makeText(SellerAct.this,s,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SellerAct.this,s,Toast.LENGTH_SHORT).show();
 
 
             }

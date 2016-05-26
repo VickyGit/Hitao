@@ -5,17 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-
 import com.example.hitao.R;
 import com.example.hitao.model.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -50,7 +46,7 @@ public class OrderAct extends Activity implements OrderRecyclerViewAdapter.Delet
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_main_layout);
         orderBuyerId=getIntent().getStringExtra("buyerObjectId");
-        Toast.makeText(OrderAct.this,"Id is "+orderBuyerId,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(OrderAct.this,"Id is "+orderBuyerId,Toast.LENGTH_SHORT).show();
 
 
         recyclerView= (RecyclerView) findViewById(R.id.order_recyclerview);
@@ -87,7 +83,7 @@ public class OrderAct extends Activity implements OrderRecyclerViewAdapter.Delet
 
             @Override
             public void onError(int i, String s) {
-                Toast.makeText(OrderAct.this,"查询失败"+i,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(OrderAct.this,"查询失败"+i,Toast.LENGTH_SHORT).show();
             }
         });
     }

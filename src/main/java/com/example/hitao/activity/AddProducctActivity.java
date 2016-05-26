@@ -1,6 +1,7 @@
 package com.example.hitao.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -134,13 +135,13 @@ public class AddProducctActivity extends Activity{
                 Spinner spinner = (Spinner) parent;
                 PCategory = position + 1;
 
-                Toast.makeText(getApplicationContext(), "" + (position + 1) + spinner.getItemAtPosition(position), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "" + (position + 1) + spinner.getItemAtPosition(position), Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "没有改变的处理", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "没有改变的处理", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -148,13 +149,25 @@ public class AddProducctActivity extends Activity{
         give_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String PpriceString = null;
                 Pnum = Integer.parseInt(String.valueOf(productnumEdit.getText()));
                 Pname = String.valueOf(productnameEdit.getText());
                 Pjieshao = String.valueOf(productjieshaoEdit.getText());
-                Pprice = Double.parseDouble(String.valueOf(productpriceEdit.getText()));
+
+                if (productpriceEdit.getText() == null) {
+                    Toast.makeText(getApplicationContext(), "请把信息填写完整", Toast.LENGTH_LONG).show();
+
+                } else{
+                    Log.d("p", String.valueOf(productpriceEdit.getText()));
+                    //Pprice = Double.valueOf(String.valueOf(productpriceEdit.getText()));
+                    PpriceString = String.valueOf(productpriceEdit.getText());
+                }
 
 
-                if (Pnum != 0 && Pprice != null && Pjieshao != null && Pname != null && PHOTOBOOLEAN) {
+
+
+                if (Pnum != 0 && PpriceString != null && Pjieshao != null && Pname != null && PHOTOBOOLEAN) {
+                    Pprice = Double.valueOf(PpriceString);
 
                     final Product product = new Product();
                     product.setNumber(Pnum);
@@ -164,6 +177,12 @@ public class AddProducctActivity extends Activity{
                     product.setSellerId(Mysellerid);
                     product.setCategory(PCategory);
                     product.setSellerName(sellername);
+                    Log.d("sellername",sellername);
+                    final ProgressDialog progressDialog = new ProgressDialog(AddProducctActivity.this);
+                    progressDialog.setTitle("提交成功");
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
                     String pathname = pathList.toString().substring(1,pathList.toString().length()-1);
                     System.out.println("绝对地址" + pathList.toString());
@@ -181,10 +200,13 @@ public class AddProducctActivity extends Activity{
 
                                 @Override
                                 public void onSuccess() {
+                                    progressDialog.dismiss();
+                                    SellerAct.sellerAct.finish();
                                     Intent intent = new Intent(AddProducctActivity.this, SellerAct.class);
                                     intent.putExtra("Mysellerid", Mysellerid);
 
                                     startActivity(intent);
+                                    AddProducctActivity.this.finish();
 
                                 }
 

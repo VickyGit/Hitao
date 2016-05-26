@@ -18,12 +18,14 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
  * Created by Administrator on 2016/5/4.
  */
 public class SDetailedAct extends Activity{
+    static SDetailedAct sDetailedAct;
     private ImageView productImage;
     private FloatingActionButton buyFloatingBtn;
     private TextView productName;
     private TextView productDescText;
     private TextView productPrice;
     private TextView productNum;
+    private TextView productSellerName;
     private int imageWidth;
     private String name;
     private String desc;
@@ -33,6 +35,7 @@ public class SDetailedAct extends Activity{
     private String category;
     private String objectID;
     private int SellerID;
+    private String sellername;
 
     private Handler handler=new Handler(){
         @Override
@@ -49,12 +52,15 @@ public class SDetailedAct extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detialed_layout);
+        sDetailedAct = this;
         init();
         filePath=getIntent().getStringExtra("picPath");
         name=getIntent().getStringExtra("name");
         desc=getIntent().getStringExtra("desc");
         price=getIntent().getStringExtra("price");
         num=getIntent().getStringExtra("num");
+        sellername=getIntent().getStringExtra("sellername");
+
         category = getIntent().getStringExtra("category");
         objectID = getIntent().getStringExtra("objectId");
         SellerID = Integer.parseInt(getIntent().getStringExtra("sellerId"));
@@ -74,6 +80,7 @@ public class SDetailedAct extends Activity{
         productDescText.setText(desc);
         productPrice.setText(price);
         productNum.setText(num);
+        productSellerName.setText(sellername);
         buyFloatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,5 +108,6 @@ public class SDetailedAct extends Activity{
         productDescText= (TextView) findViewById(R.id.product_desc_text);
         productPrice= (TextView) findViewById(R.id.product_desc_price);
         productNum= (TextView) findViewById(R.id.product_desc_number);
+        productSellerName = (TextView)findViewById(R.id.product_desc_sellerName);
     }
 }

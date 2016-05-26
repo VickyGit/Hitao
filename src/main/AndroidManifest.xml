@@ -25,24 +25,36 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RegAct"/>
-        <activity android:name=".activity.BuyerAct"/>
-        <activity android:name=".activity.DetailedAct"/>
-        <activity android:name=".activity.PersonalAct"/>
-        <activity android:name=".activity.OrderAct"/>
-        <activity android:name=".activity.SOrderAct"/>
-        <activity android:name=".activity.AddProducctActivity"/>
-        <activity android:name=".activity.ChProoductActivity"/>
-        <activity android:name=".activity.SDetailedAct"/>
-        <activity android:name=".activity.SellerAct"/>
-        <activity android:name=".activity.SPersonalActivity"/>
+        <activity android:name=".activity.RegAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.BuyerAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.DetailedAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.PersonalAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.OrderAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.SOrderAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.AddProducctActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.ChProoductActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.SDetailedAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.SellerAct"
+            android:launchMode="singleTask"/>
+        <activity android:name=".activity.SPersonalActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

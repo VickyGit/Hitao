@@ -104,6 +104,7 @@ public class SRecyclerViewAdapter extends RecyclerView.Adapter<SRecyclerViewAdap
                 intent.putExtra("sellerId",productList.get(position).getSellerId().toString());
                 intent.putExtra("category",productList.get(position).getCategory().toString());
                 intent.putExtra("objectId",productList.get(position).getObjectId().toString());
+                intent.putExtra("sellername",productList.get(position).getSellerName().toString());
                 mContext.startActivity(intent);
 
             }

@@ -2,6 +2,7 @@ package com.example.hitao.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -73,23 +74,23 @@ public class MainActivity extends Activity implements View.OnClickListener{
         query.findObjects(this, new FindCallback() {
             @Override
             public void onSuccess(JSONArray jsonArray) {
-                Toast.makeText(MainActivity.this,"查询成功"+jsonArray.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"查询成功"+jsonArray.toString(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(MainActivity.this,"查询失败:"+s,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"查询失败:"+s,Toast.LENGTH_SHORT).show();
             }
         });
         query1.findObjects(this, new FindCallback() {
             @Override
             public void onSuccess(JSONArray jsonArray) {
-                Toast.makeText(MainActivity.this,"查询成功"+jsonArray.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"查询成功"+jsonArray.toString(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(MainActivity.this,"查询失败:"+s,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"查询失败:"+s,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -151,11 +152,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
                                     if(list.isEmpty()){
                                         Toast.makeText(MainActivity.this,"用户名不存在",Toast.LENGTH_SHORT).show();
                                     }else{
+                                        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                                        progressDialog.setTitle("登录成功");
+                                        progressDialog.setMessage("Loading...");
+                                        progressDialog.setCancelable(false);
+                                        progressDialog.show();
                                         Intent intent=new Intent(MainActivity.this,BuyerAct.class);
                                         intent.putExtra("buyerObject",list.get(0));
 
                                         //启动普通的Activity动画
                                         startActivity(intent);
+                                        MainActivity.this.finish();
                                     }
                                 }
 
@@ -176,6 +183,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
                                     if(list.isEmpty()){
                                         Toast.makeText(MainActivity.this,"用户名不存在",Toast.LENGTH_SHORT).show();
                                     }else{
+                                        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                                        progressDialog.setTitle("登录成功");
+                                        progressDialog.setMessage("Loading...");
+                                        progressDialog.setCancelable(false);
+                                        progressDialog.show();
                                         Intent intent=new Intent(MainActivity.this,SellerAct.class);
                                         intent.putExtra("Mysellerid",list.get(0).getSellerId());
                                         intent.putExtra("sellername",list.get(0).getSellerName());
@@ -183,6 +195,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
                                         //启动普通的Activity动画
                                         startActivity(intent);
+                                        MainActivity.this.finish();
                                     }
                                 }
 
