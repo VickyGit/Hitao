@@ -8,9 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.transition.Explode;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -34,8 +32,8 @@ public class RegAct extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setEnterTransition(new Explode().setDuration(1000));
+        //getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        //getWindow().setEnterTransition(new Explode().setDuration(1000));
         setContentView(R.layout.reg_layout);
         init();
         regBtn.setOnClickListener(this);
