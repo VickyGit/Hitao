@@ -118,7 +118,7 @@
                 android:layout_alignParentRight="true"
                 app:fab_size="normal"
                 android:layout_marginTop="160dp"
-                android:src="@drawable/setting"
+                android:src="@drawable/cartdes"
                 app:layout_anchor="@id/product_desc_image"
                 app:layout_anchorGravity="bottom|right|end"
                 />

@@ -51,7 +51,7 @@ public class SDetailedAct extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detialed_layout);
+        setContentView(R.layout.sdetialed_layout);
         sDetailedAct = this;
         init();
         filePath=getIntent().getStringExtra("picPath");

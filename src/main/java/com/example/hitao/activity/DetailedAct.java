@@ -1,19 +1,15 @@
 package com.example.hitao.activity;
 
-import android.animation.Animator;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,8 +21,6 @@ import com.example.hitao.model.Buyer;
 import com.example.hitao.model.Order;
 import com.example.hitao.model.Product;
 import com.getbase.floatingactionbutton.FloatingActionButton;
-
-import org.w3c.dom.Text;
 
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -67,12 +61,13 @@ public class DetailedAct extends Activity{
             }
         }
     };
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //第一步：允许Transition，并设置Transition
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-        getWindow().setEnterTransition(new Explode().setDuration(1000));
+       // getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        //getWindow().setEnterTransition(new Explode().setDuration(1000));
         setContentView(R.layout.detialed_layout);
         init();
         filePath=getIntent().getStringExtra("picPath");
@@ -110,10 +105,10 @@ public class DetailedAct extends Activity{
             @Override
             public void onClick(View view) {
 
-                Animator animator= ViewAnimationUtils.createCircularReveal(buyFloatingBtn,buyFloatingBtn.getWidth()/2,buyFloatingBtn.getHeight()/2,0,buyFloatingBtn.getWidth());
-                animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                animator.setDuration(1000);
-                animator.start();
+                //Animator animator= ViewAnimationUtils.createCircularReveal(buyFloatingBtn,buyFloatingBtn.getWidth()/2,buyFloatingBtn.getHeight()/2,0,buyFloatingBtn.getWidth());
+                //animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                //animator.setDuration(1000);
+                //animator.start();
 
                 final Dialog dialog=new Dialog(DetailedAct.this);
                 dialog.setContentView(R.layout.buy_dialog_layout);
@@ -164,7 +159,7 @@ public class DetailedAct extends Activity{
                 });
 
 
-                dialog.create();
+                //dialog.create();
                 dialog.show();
             }
         });

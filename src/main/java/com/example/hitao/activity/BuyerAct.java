@@ -1,12 +1,10 @@
 package com.example.hitao.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,40 +13,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.transition.ChangeTransform;
-import android.transition.Explode;
-import android.transition.Transition;
-import android.util.Log;
-import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hitao.R;
-
 import com.example.hitao.model.Buyer;
 import com.example.hitao.model.Product;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-
-import java.io.File;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.listener.DownloadFileListener;
-import cn.bmob.v3.listener.FindCallback;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UploadFileListener;
 
 /**
  * Created by Administrator on 2016/5/1.
@@ -204,13 +185,14 @@ public class BuyerAct extends Activity implements View.OnClickListener{
         });
 
     }
-    public void startAnimationActivity(final View view,int position,List<Product> productList,String filePath){
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void startAnimationActivity(final View view, int position, List<Product> productList, String filePath){
         View card=view.findViewById(R.id.card_item_view);
         View btn=this.findViewById(R.id.floatingMenu);
-        Transition ts=new ChangeTransform();
-        ts.setDuration(3000);
-        getWindow().setExitTransition(ts);
-        Bundle bundle= ActivityOptions.makeSceneTransitionAnimation((Activity)this, Pair.create(card,"card"),Pair.create(btn,"btn")).toBundle();
+        //Transition ts=new ChangeTransform();
+        //ts.setDuration(3000);
+        //getWindow().setExitTransition(ts);
+//        Bundle bundle= ActivityOptions.makeSceneTransitionAnimation((Activity)this, Pair.create(card,"card"),Pair.create(btn,"btn")).toBundle();
         Intent intent=new Intent(BuyerAct.this,DetailedAct.class);
         intent.putExtra("picPath",filePath);
         intent.putExtra("name",productList.get(position).getProductName());
@@ -223,7 +205,7 @@ public class BuyerAct extends Activity implements View.OnClickListener{
         intent.putExtra("productObjectId",productList.get(position).getObjectId().toString());
         intent.putExtra("productObject",productList.get(position));
         intent.putExtra("position",position);
-        startActivity(intent,bundle);
+        startActivity(intent);
     }
     //查找商品
     public void searchProduct(){

@@ -8,11 +8,8 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:contentPaddingLeft="10dp"
-        app:contentPaddingRight="10dp"
-        app:contentPaddingBottom="10dp"
-        app:contentPaddingTop="10dp"
+
+
 
 
         >

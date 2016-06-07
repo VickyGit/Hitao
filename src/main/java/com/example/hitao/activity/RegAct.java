@@ -36,8 +36,7 @@ public class RegAct extends Activity implements View.OnClickListener{
         //getWindow().setEnterTransition(new Explode().setDuration(1000));
         setContentView(R.layout.reg_layout);
         init();
-        regBtn.setOnClickListener(this);
-    }
+        regBtn.setOnClickListener(this);}
     public void init(){
         userName= (MaterialEditText) findViewById(R.id.name_reg);
         userPass= (MaterialEditText) findViewById(R.id.password_reg);

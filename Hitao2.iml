@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":Hitao2" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":Hitao2" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="LoserApplication" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -92,29 +92,29 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="BmobSDK_V3.4.6_0415" level="project" />
-    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="libshttp-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="Bmob_Push_V0.8beta_20160420" level="project" />
     <orderEntry type="library" exported="" name="android-support-v4" level="project" />
-    <orderEntry type="library" exported="" name="okhttp-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="cardview-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="circleimageview-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="design-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-23.3.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="org.apache.http.legacy" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
-    <orderEntry type="library" exported="" name="floatingactionbutton-1.10.1" level="project" />
-    <orderEntry type="library" exported="" name="libsio-1.4.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="okio-1.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="org.apache.http.legacy" level="project" />
+    <orderEntry type="library" exported="" name="circleimageview-2.0.0" level="project" />
+    <orderEntry type="library" exported="" name="BmobSDK_V3.4.6_0415" level="project" />
+    <orderEntry type="library" exported="" name="cardview-v7-21.0.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.3.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.3.0" level="project" />
-    <orderEntry type="module" module-name="photopicker" exported="" />
+    <orderEntry type="library" exported="" name="okhttp-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="animated-vector-drawable-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="Bmob_Push_V0.8beta_20160420" level="project" />
+    <orderEntry type="library" exported="" name="libshttp-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="libsio-1.4.0" level="project" />
+    <orderEntry type="library" exported="" name="floatingactionbutton-1.10.1" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="okio-1.4.0" level="project" />
     <orderEntry type="module" module-name="library" exported="" />
+    <orderEntry type="module" module-name="photopicker" exported="" />
     <orderEntry type="library" exported="" name="org.apache.http.legacy-android-23" level="project" />
   </component>
 </module>
